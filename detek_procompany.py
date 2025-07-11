@@ -114,20 +114,20 @@ if pagina == "Dashboard":
     total_empresas = len(EQUIPOS_EMPRESA)
     total_equipos = sum(len(equipos) for equipos in EQUIPOS_EMPRESA.values())
 
-    st.markdown(f"- 🏢 **Empresas registradas:** `{total_empresas}`")
-    st.markdown(f"- 🧰 **Equipos registrados:** `{total_equipos}`")
+    st.markdown(f"-  **Empresas registradas:** `{total_empresas}`")
+    st.markdown(f"-  **Equipos registrados:** `{total_equipos}`")
 
     # Partes más cambiadas
     cambios = data["parte cambiada"].dropna().str.split(";").explode()
     cambios = cambios[cambios.str.strip() != ""]  # eliminar vacíos
     partes_frecuentes = cambios.value_counts().head(5)
 
-    st.markdown("### 🧩 Partes más cambiadas")
+    st.markdown("###  Partes más cambiadas")
     for parte, count in partes_frecuentes.items():
         st.markdown(f"- {parte}: `{count}` cambios")
 
     # Equipos críticos
-    st.markdown("### 🚨 Equipos con partes en estado crítico")
+    st.markdown("###  Equipos con partes en estado crítico")
     equipos_criticos = []
 
     for empresa_k, equipos_k in EQUIPOS_EMPRESA.items():
@@ -162,7 +162,7 @@ if pagina == "Dashboard":
         st.markdown("- ✅ Sin equipos en estado crítico.")
 
     # Equipos con más horas acumuladas
-    st.markdown("### ⏱️ Top 5 equipos con más horas acumuladas")
+    st.markdown("###  Top 5 equipos con más horas acumuladas")
 
     horas_acumuladas = {}
 
@@ -180,9 +180,9 @@ if pagina == "Dashboard":
         st.markdown(f"- 🕒 `{equipo}`: `{horas:.1f}` horas")
 
     # Botón de descarga (simulado como TXT)
-    st.markdown("### 📤 Exportar informe")
+    st.markdown("###  Exportar informe")
     st.download_button(
-        label="📥 Exportar informe PDF",
+        label=" Exportar informe PDF",
         data="Resumen del dashboard generado por DeTEK PRO Company.",
         file_name="informe_dashboard.txt"
     )
@@ -218,7 +218,7 @@ for empresa in sorted(EQUIPOS_EMPRESA.keys()):
         for parte, usadas in estado_partes.items():
             limite = VIDA_UTIL.get(parte, VIDA_UTIL_DEFECTO)
             restantes = limite - usadas
-            if restantes <= 24:
+            if restantes <= 0.5:
                 alerta = "⚠️"
                 break
             elif restantes <= 192 and alerta != "⚠️":
@@ -362,7 +362,7 @@ for codigo, detalles in equipos_empresa.items():
     for parte, usadas in estado_partes.items():
         limite = VIDA_UTIL.get(parte, VIDA_UTIL_DEFECTO)
         restantes = limite - usadas
-        if restantes <= 24:
+        if restantes <= 0.5:
             estado_icono = "⚠️"
             break
         elif restantes <= 192 and estado_icono != "⚠️":
@@ -493,7 +493,7 @@ for parte, usadas in estado_partes.items():
     restantes = max(limite - usadas, 0)
     porcentaje = min(usadas / limite, 1.0)
 
-    if restantes <= 24:
+    if restantes <= 0.5:
         color, estado_txt = "⚠️", "Falla esperada"
     elif restantes <= 192:
         color, estado_txt = "🔴", "Crítico"
