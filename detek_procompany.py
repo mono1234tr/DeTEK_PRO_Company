@@ -81,25 +81,20 @@ for _, row in equipos_df.iterrows():
 
 
 # --- INTERFAZ ---
-st.set_page_config(page_title="DeTEK PRO Company", layout="centered")
+st.set_page_config(page_title="DeTEK PRO Company", layout="wide")
 
 
 
-#---------------LOGO-------------
+#---------------LOGO Y ENCABEZADO OPTIMIZADO PARA MÓVIL-------------
 st.markdown(
     """
-    <div style="position: absolute; top: 40px; right: 10px;">
-        <img src="https://i0.wp.com/tekpro.com.co/wp-content/uploads/2023/12/cropped-logo-tekpro-main-retina.png?fit=522%2C145&ssl=1" width="260">
+    <div style='text-align:center; margin-top:10px;'>
+        <img src='https://i0.wp.com/tekpro.com.co/wp-content/uploads/2023/12/cropped-logo-tekpro-main-retina.png?fit=522%2C145&ssl=1' width='180' style='max-width:80vw;'>
+        <h1 style='font-family: Georgia; font-size: 2em; margin-bottom: 0; margin-top: 0.2em;'>
+            <span style='color: #00BDAD;'>DeTEK PRO</span>
+            <span style='color: #000; font-size: 1em;'> Company</span>
+        </h1>
     </div>
-    """,
-    unsafe_allow_html=True
-)
-st.markdown(
-    """
-     <h1 style='font-family: Georgia; font-size: 40px; margin-bottom: 0;'>
-        <span style='color: #00BDAD;'>DeTEK PRO</span>
-        <span style='color: #000; font-size: 24px;'> Company</span>
-     </h1>
     """,
     unsafe_allow_html=True
 )
